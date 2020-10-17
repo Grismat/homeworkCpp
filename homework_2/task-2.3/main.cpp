@@ -1,6 +1,16 @@
 #include <algorithm>
 #include <stdio.h>
 
+void printArray(int* const begin, int* const end)
+{
+    size_t size = begin - end;
+    for (size_t i = 0; i < size; i++)
+    {
+        printf("%i ", begin[i]);
+    }
+    printf("\n");
+}
+
 void bubbleSort(int* const begin, int* const end)
 {
     size_t size = end - begin;
@@ -30,6 +40,7 @@ void countingSort(int* const begin, int* const  end)
     }
 
     int* valuesCount = new int[maxElement+1]();
+
     for (size_t i = 0; i < size; i++)
     {
         valuesCount[begin[i]]++;
@@ -43,6 +54,8 @@ void countingSort(int* const begin, int* const  end)
             mainIdx++;
         }
     }
+
+    delete[] valuesCount;
 }
 
 int main()
@@ -58,24 +71,13 @@ int main()
     countingSort(array2, array2+14);
 
     printf("Standart sort function:\n\t");
-    for (int i = 0; i < 13; i++)
-    {
-        printf("%i ", array1[i]);
-    }
-    printf("\n");
-
+    printArray(array0, array0+14);
+    
     printf("BubbleSort:\n\t");
-    for (int i = 0; i < 13; i++)
-    {
-        printf("%i ", array1[i]);
-    }
-    printf("\n");
+    printArray(array2, array2+14);
 
     printf("CountingSort:\n\t");
-    for (int i = 0; i < 13; i++)
-    {
-        printf("%i ", array1[i]);
-    }
+    printArray(array2, array2+14);
 
     return 0;
 }
