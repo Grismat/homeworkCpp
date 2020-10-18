@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <algorithm>
 
-
 void transformate(int* const begin, int const* end)
 {
-
     int size = end - begin;
     int firstIndex = 0;
     int firstLessFromEndIndex = size - 1;
@@ -21,7 +19,7 @@ void transformate(int* const begin, int const* end)
         {
             for (int i = firstLessFromEndIndex; i >= firstIndex; i--)
             {
-                if (begin[i] < begin[firstIndex]  || i == firstIndex)
+                if (begin[i] < begin[firstIndex] || i == firstIndex)
                 {
                     firstLessFromEndIndex = i;
                     break;
@@ -39,7 +37,6 @@ void transformate(int* const begin, int const* end)
     }
 }
 
-#include <iostream>
 int main()
 {
     int const size = 20;
