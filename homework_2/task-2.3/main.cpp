@@ -18,9 +18,9 @@ void bubbleSort(int* const begin, int* const end)
     {
         for (int j = 1; j < size - i; j++)
         {
-            if (begin[j] < begin[j-1])
+            if (begin[j] < begin[j - 1])
             {
-                std::swap(begin[j], begin[j-1]);
+                std::swap(begin[j], begin[j - 1]);
             }
         }
     }
@@ -39,7 +39,7 @@ void countingSort(int* const begin, int* const  end)
         }
     }
 
-    int* valuesCount = new int[maxElement+1]();
+    int* valuesCount = new int[maxElement + 1]();
 
     for (size_t i = 0; i < size; i++)
     {
@@ -62,22 +62,24 @@ int main()
 {
     printf("Here's the simple test for two sort functions\n");
 
-    int array0[14] = {4, 1, 6, 3, 7, 2, 3, 6, 3, 8, 1, 1, 1, 43};
-    int array1[14] = {4, 1, 6, 3, 7, 2, 3, 6, 3, 8, 1, 1, 1, 43};
-    int array2[14] = {4, 1, 6, 3, 7, 2, 3, 6, 3, 8, 1, 1, 1, 43};
+    int const size = 14;
 
-    std::sort(array0, array0+14);
-    bubbleSort(array1, array1+14);
-    countingSort(array2, array2+14);
+    int array0[size] = {4, 1, 6, 3, 7, 2, 3, 6, 3, 8, 1, 1, 1, 43};
+    int array1[size] = {4, 1, 6, 3, 7, 2, 3, 6, 3, 8, 1, 1, 1, 43};
+    int array2[size] = {4, 1, 6, 3, 7, 2, 3, 6, 3, 8, 1, 1, 1, 43};
+
+    std::sort(array0, array0 + size);
+    bubbleSort(array1, array1 + size);
+    countingSort(array2, array2 + size);
 
     printf("Standart sort function:\n\t");
-    printArray(array0, array0+14);
+    printArray(array0, array0 + size);
     
     printf("BubbleSort:\n\t");
-    printArray(array2, array2+14);
+    printArray(array2, array2 + size);
 
     printf("CountingSort:\n\t");
-    printArray(array2, array2+14);
+    printArray(array2, array2 + size);
 
     return 0;
 }
