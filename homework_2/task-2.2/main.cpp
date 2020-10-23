@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <cstdlib>
+#include <time.h>
 
 size_t binaryPow(int number, int degree)
 {
@@ -34,9 +35,12 @@ int linearPow(int number, int degree)
 
 int main()
 {
-    printf("Here is the simple test of pow functions\n");
+    srand(time(0));
+    int const tries = 20;
 
-    for (int i = 0; i < 20; i++)
+    printf("Here is the simple test of the pow functions:\n");
+
+    for (int i = 0; i < tries; i++)
     {
         int number = rand() % 10;
         int degree = rand() % 11;
