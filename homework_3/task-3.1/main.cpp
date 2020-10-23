@@ -15,106 +15,39 @@ void insertionSort(int* const begin, int* const end)
     }
 }
 
-bool hasPivotElement(int* const begin, int* const end)
-{
-    int* elementPtr = begin + 1;
-
-    while (elementPtr != end)
-    {
-        if (*elementPtr != *begin)
-        {
-            return true;
-        }
-        elementPtr++;
-    }
-    return false;
-}
-
-void badQuickSort(int* const begin, int* const end)
+size_t partition(int* const begin, int* const end)
 {
     size_t size = end - begin;
+    int pivotElement = begin[size - 1];
+    int leftCursor = 0;
 
-    if (size < 10)
+    for (int i = 0; i < size; i++)
+    {
+        if (begin[i] < pivotElement)
+        {
+            std::swap(begin[i], begin[leftCursor]);
+            leftCursor++;
+        }
+    }
+    std::swap(begin[leftCursor], begin[size - 1]);
+    return leftCursor;
+}
+
+void quickSort(int* const begin, int* const end)
+{
+    if (end - begin < 10)
     {
         insertionSort(begin, end);
         return;
     }
 
-    if (!hasPivotElement(begin, end))
-    {
-        return;
-    }
-
-    size_t leftCursor = 0;
-    size_t rightCursor = size - 1;
-
-    int pivotElement = *(end - 1);
-
-    bool isLeftCursorMoving = true;
-    bool isRightCursorMoving = true;
-
-    while (leftCursor < rightCursor)
-    {
-        if (isLeftCursorMoving)
-        {
-            if (begin[leftCursor] < pivotElement)
-            {
-                leftCursor++;
-            }
-            else
-            {
-                isLeftCursorMoving = false;
-            }
-        }
-
-        if (isRightCursorMoving)
-        {
-            if (begin[rightCursor] >= pivotElement)
-            {
-                rightCursor--;
-            }
-            else
-            {
-                isRightCursorMoving = false;
-            }
-        }
-
-        if (!isRightCursorMoving && !isLeftCursorMoving && leftCursor < rightCursor)
-        {
-            std::swap(begin[rightCursor], begin[leftCursor]);
-            isRightCursorMoving = true;
-            isLeftCursorMoving = true;
-        }
-    }
-
-    badQuickSort(begin, begin + rightCursor);
-    badQuickSort(begin + rightCursor, end);
+    size_t partitionIndex = partition(begin, end);
+    quickSort(begin, begin + partitionIndex);
+    quickSort(begin + partitionIndex + 1, end);
 }
 
 int main()
 {
-    /*srand(time(NULL));
-    int const size = 3;
-    int array[size];
-
-    for (int i = 0; i < size; i++)
-    {
-        array[i] = rand()%100;
-    }
-
-    printf("Default array is:\n");
-    for (int i = 0; i < size; i++)
-    {
-        printf("%i ", array[i]);
-    }
-
-    transformate(array, array + size);
-
-    printf("\n\nTransformed array is:\n");
-    for (int i = 0; i < size; i++)
-    {
-        printf("%i ", array[i]);
-    }*/
     srand(time(0));
     int const size = 100;
     int array1[size];
@@ -127,15 +60,17 @@ int main()
         array2[i] = randomValue;
     }
 
-    badQuickSort(array1, array1 + size);
+    quickSort(array1, array1 + size);
     std::sort(array2, array2 + size);
 
+    printf("Here's the array sorted by function from the standard library\n");
     for (int i = 0; i < size; i++)
     {
         printf("%i ", array2[i]);
     }
 
-    printf("\n");
+    printf("\n\n");
+    printf("Here's the array sorted by my quickSort function\n");
     for (int i = 0; i < size; i++)
     {
         printf("%i ", array1[i]);
