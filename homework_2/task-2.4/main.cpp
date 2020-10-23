@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <algorithm>
+#include <time.h>
 
-void transformate(int* const begin, int const* end)
+void transform(int* const begin, int const* end)
 {
     int size = end - begin;
     int firstIndex = 0;
@@ -39,12 +40,14 @@ void transformate(int* const begin, int const* end)
 
 int main()
 {
+    srand(time(0));
+
     int const size = 20;
     int array[size];
 
     for (int i = 0; i < size; i++)
     {
-        array[i] = rand();
+        array[i] = rand()%1000;
     }
 
     printf("Default array is:\n");
@@ -53,7 +56,7 @@ int main()
         printf("%i ", array[i]);
     }
 
-    transformate(array, array + size);
+    transform(array, array + size);
 
     printf("\n\nTransformed array is:\n");
     for (int i = 0; i < size; i++)
