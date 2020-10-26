@@ -2,40 +2,60 @@
 #include <cstdlib>
 #include <time.h>
 
-size_t binaryPow(int number, int degree)
+double binaryPow(int number, int degree)
 {
+    int integerValue = 0;
+    bool isDegreeNegative = false;
+
+    if (degree < 0)
+    {
+        isDegreeNegative = true;
+        degree = -degree;
+    }
+
     if (degree % 2 == 0)
     {
         if (degree == 0)
         {
-            return 1;
+            integerValue = 1;
         }
         else
         {
-            return binaryPow(number, degree / 2) * binaryPow(number, degree / 2);
+            int numberInHalfDegree = binaryPow(number, degree / 2);
+            integerValue = numberInHalfDegree * numberInHalfDegree;
         }
     }
     else
     {
-        return binaryPow(number, degree/2) * binaryPow(number, degree/2) * number;
+        int numberInHalfDegree = binaryPow(number, degree / 2);
+        integerValue = numberInHalfDegree * numberInHalfDegree * number;
     }
+
+    return (isDegreeNegative) ? 1.0 / integerValue : integerValue;
 }
 
-int linearPow(int number, int degree)
+double linearPow(int number, int degree)
 {
-    int result = 1;
+    int integerResult = 1;
+    bool isDegreeNegative = false;
+
+    if (degree < 0)
+    {
+        isDegreeNegative = true;
+        degree = -degree;
+    }
 
     for (int i = 0; i < degree; i++)
     {
-        result *= number;
+        integerResult *= number;
     }
 
-    return result;
+    return (isDegreeNegative) ? 1.0 / integerResult : integerResult;
 }
 
 int main()
 {
-    srand(time(0));
+    srand(time(nullptr));
     int const tries = 20;
 
     printf("Here is the simple test of the pow functions:\n");
@@ -44,7 +64,12 @@ int main()
     {
         int number = rand() % 10;
         int degree = rand() % 11;
-        printf("Number: %i\t Degree: %i\t linearPow: %i\t binaryPow: %i\n",
+        if (i % 2 == 0)
+        {
+            degree = -degree;
+        }
+
+        printf("Number: %i\t Degree: %i\t linearPow: %f\t binaryPow: %f\n",
                number, degree, linearPow(number, degree), binaryPow(number, degree));
     }
 
