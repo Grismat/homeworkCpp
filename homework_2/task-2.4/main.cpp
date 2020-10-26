@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <time.h>
 
-void transform(int* const begin, int const* end)
+void transform(int* const begin, int* const end)
 {
     int size = end - begin;
     int firstIndex = 0;
@@ -40,14 +40,14 @@ void transform(int* const begin, int const* end)
 
 int main()
 {
-    srand(time(0));
+    srand(time(nullptr));
 
     int const size = 20;
     int array[size];
 
     for (int i = 0; i < size; i++)
     {
-        array[i] = rand()%1000;
+        array[i] = rand() % 1000;
     }
 
     printf("Default array is:\n");
