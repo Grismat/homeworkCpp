@@ -35,7 +35,8 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-.idea/**/workspace.xml
+#homework_2/**/.idea/**/workspace.xml
+**/.idea/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
@@ -102,3 +103,7 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+# homework_2/task-2.1/.idea/workspace.xml
+homework_2/task-2.2/.idea/vcs.xml
+homework_2/task-2.2/.idea/vcs.xml
