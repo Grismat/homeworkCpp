@@ -8,9 +8,9 @@ void insertionSort(int* const begin, int* const end)
     size_t size = end - begin;
     for (int i = 1; i < size; i++)
     {
-        for (int j = i; j > 0 && begin[j] < begin[j-1]; j--)
+        for (int j = i; j > 0 && begin[j] < begin[j - 1]; j--)
         {
-            std::swap(begin[j], begin[j-1]);
+            std::swap(begin[j], begin[j - 1]);
         }
     }
 }
@@ -48,14 +48,14 @@ void quickSort(int* const begin, int* const end)
 
 int main()
 {
-    srand(time(0));
+    srand(time(nullptr));
     int const size = 100;
     int array1[size];
     int array2[size];
 
     for (int i = 0; i < size; i++)
     {
-        int randomValue = rand()%1000;
+        int randomValue = rand() % 1000;
         array1[i] = randomValue;
         array2[i] = randomValue;
     }
