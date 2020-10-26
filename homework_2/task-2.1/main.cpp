@@ -28,7 +28,8 @@ int fibonacciIterative(int number)
     return currentNumber;
 }
 
-int main() {
+int main()
+{
 
     printf("Here's some test for my functions\n");
     for (int i = 1; i <= 30; i++)
