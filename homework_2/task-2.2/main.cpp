@@ -31,7 +31,7 @@ double binaryPow(int number, int degree)
         integerValue = numberInHalfDegree * numberInHalfDegree * number;
     }
 
-    return (isDegreeNegative) ? 1.0 / integerValue : integerValue;
+    return (isDegreeNegative) ? (1.0 / integerValue) : integerValue;
 }
 
 double linearPow(int number, int degree)
@@ -50,7 +50,7 @@ double linearPow(int number, int degree)
         integerResult *= number;
     }
 
-    return (isDegreeNegative) ? 1.0 / integerResult : integerResult;
+    return (isDegreeNegative) ? (1.0 / integerResult) : integerResult;
 }
 
 int main()
