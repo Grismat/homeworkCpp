@@ -3,7 +3,7 @@
 
 void printArray(int* const begin, int* const end)
 {
-    size_t size = begin - end;
+    size_t size = end - begin;
     for (size_t i = 0; i < size; i++)
     {
         printf("%i ", begin[i]);
@@ -26,36 +26,30 @@ void bubbleSort(int* const begin, int* const end)
     }
 }
 
-void countingSort(int* const begin, int* const  end)
+void countingSort(int* const begin, int* const end)
 {
     size_t size = end - begin;
+    int* temporaryArray = new int[size];
 
-    int maxElement = begin[0];
-    for (size_t i = 1; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        if (begin[i] > maxElement)
+        size_t counter = 0;
+        for (int j = 0; j < size; j++)
         {
-            maxElement = begin[i];
+            if (begin[j] < begin[i] || (begin[i] == begin[j] && j < i))
+            {
+                counter++;
+            }            
         }
+        temporaryArray[counter] = begin[i];
     }
 
-    int* valuesCount = new int[maxElement + 1]();
-
-    for (size_t i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        valuesCount[begin[i]]++;
+        begin[i] = temporaryArray[i];
     }
 
-    for (size_t i = 0; i <= maxElement; i++)
-    {
-        int mainIdx = 0;
-        while (valuesCount[i] > 0) {
-            begin[mainIdx] = valuesCount[i]--;
-            mainIdx++;
-        }
-    }
-
-    delete[] valuesCount;
+    delete[] temporaryArray;
 }
 
 int main()
