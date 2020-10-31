@@ -55,7 +55,6 @@ int main() {
 
     std::string inputString;
     getline(std::cin, inputString);
-    std::cout << inputString << std::endl;
 
     float result = 0;
 
