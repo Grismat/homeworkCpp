@@ -53,6 +53,7 @@ int main() {
     
     Stack stack;
 
+    printf("Enter an expression in postfix form\n");
     std::string inputString;
     getline(std::cin, inputString);
 
