@@ -41,6 +41,6 @@ T Stack<T>::popElement() {
 }
 
 template<class T>
-size_t size() noexcept {
+size_t Stack<T>::size() const noexcept {
     return Stack<T>::_size;
 }

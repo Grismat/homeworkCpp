@@ -4,7 +4,7 @@
 template<class T>
 struct Element { //стоит ли объявлять структуру внутри класса Stak? Или это неправильно
     T value;
-    Element* prev;
+    Element<T>* prev;
 };
 
 template<class T>
@@ -25,6 +25,8 @@ struct Stack {
     size_t size() const noexcept;
 
 private:
-    Element* top;
+    Element<T>* top;
     size_t _size;
 };
+
+#include "stack_cpp_style.cpp"
