@@ -44,8 +44,32 @@ bool parseString(std::string const& inputString) {
     return stack.size() == 0;
 }
 
+bool test() {
+    return !parseString("( )))))")
+        && !parseString("((((( )")
+        && parseString("() {} []")
+        && parseString("(( [ {} ] ))")
+        && !parseString("({[}])")
+        && parseString("")
+        && !parseString("(((")
+        && !parseString(")))")
+        && parseString("(Hel{lo} [world])!\n")
+        && parseString("Hello world")
+        && !parseString(")")
+        && !parseString("(");
+}
+
 int main() {
-    
+
+    printf("Running tests...\n");
+    if (test()) {
+        printf ("Tests OK\n");
+    }
+    else {
+        printf("Tests failed\n");
+    }
+
+    printf("\nInput a string:\n");
     std::string inputString;
     getline(std::cin, inputString);
 
