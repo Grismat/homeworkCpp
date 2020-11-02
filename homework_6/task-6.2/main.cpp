@@ -3,35 +3,41 @@
 #include <iostream>
 #include <stdio.h>
 
+bool checkSymbol(Stack<char>& stack, char const symbol) {
+
+    if (symbol == '(' || symbol == '{' || symbol == '[') {
+        stack.pushElement(symbol);
+    }
+    else { 
+        switch (symbol) {
+            case ')':
+                if (stack.size() == 0 || stack.popElement() != '(') {
+                    return false;
+                }
+                break;
+            case '}':
+                if (stack.size() == 0 || stack.popElement() != '{') {
+                    return false;
+                }
+                break;
+            case ']':
+                if (stack.size() == 0 || stack.popElement() != '[') {
+                    return false;
+                }
+                break;
+        }            
+    }
+
+    return true;
+}
+
 bool parseString(std::string const& inputString) {
 
     Stack<char> stack;
 
     for (int i = 0; i < inputString.size(); i++) {
-        
-        char const& symbol = inputString[i];
-
-        if (symbol == '(' || symbol == '{' || symbol == '[') {
-            stack.pushElement(symbol);
-        }
-        else { 
-            switch (symbol) {
-                case ')':
-                    if (stack.size() == 0 || stack.popElement() != '(') {
-                        return false;
-                    }
-                    break;
-                case '}':
-                    if (stack.size() == 0 || stack.popElement() != '{') {
-                        return false;
-                    }
-                    break;
-                case ']':
-                    if (stack.size() == 0 || stack.popElement() != '[') {
-                        return false;
-                    }
-                    break;
-            }            
+        if (!checkSymbol(stack, inputString[i])) {
+            return false;
         }
     }
 
