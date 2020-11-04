@@ -8,49 +8,9 @@ bool processSymbol(Stack<char>* stack, char* outputString,
     
     char oper;
 
-    /*switch (symbol) {
-    case '(':
-        stack->pushElement('(');
-        break;
-
-    case ')':  
-        oper = symbol;
-
-        while (oper != '(') {
-            outputString[*outputStringBack] = oper;
-            *outputStringBack++;
-
-            if (stack->size() == 0) {
-                return false;
-            }
-
-            oper = stack->size();
-        }
-
-        outputString[*outputStringBack] = oper;
-        *outputStringBack++;
-        break;
-
-    case '+' ||  '-':
-        if (stack->size() != 0 
-                && (stack->topElement() == '*' || stack->topElement() == '/')) {
-            outputString[*outputStringBack] = stack->popElement();
-            *outputStringBack++;
-        }
-        outputString[*outputStringBack] = symbol;
-        *outputStringBack++;
-        break;
-    
-    case '*' || '/':
-        outputString[*outputStringBack] = symbol;
-        *outputStringBack++;
-        break;
-    }*/
-
     if (symbol == '(') {
         stack->pushElement(symbol);
-    }
-    else {
+    } else {
         if (symbol == ')') {
             do {
                 if (stack->size() == 0) {
@@ -62,29 +22,23 @@ bool processSymbol(Stack<char>* stack, char* outputString,
             } while (oper != '(');
 
             (*outputStringBack)--; //ignore added '(' symbol
-        }
-        else {
-            if (symbol == '+' || symbol == '-') {
-                printf("add\n");
-                if (stack->size() != 0 
-                        && (stack->topElement() == '*' || stack->topElement() == '/')) {
-                    outputString[*outputStringBack] = stack->popElement();
-                    *(outputStringBack)++;
-                }
-                stack->pushElement(symbol);
+    } else {
+        if (symbol == '+' || symbol == '-') {
+            printf("add\n");
+            if (stack->size() != 0 
+                    && (stack->topElement() == '*' || stack->topElement() == '/')) {
+                outputString[*outputStringBack] = stack->popElement();
+                *(outputStringBack)++;
             }
-            else {
-                if (symbol == '*' || symbol == '/') {
-                    stack->pushElement(symbol);
-                }
-                else {
-                    if (symbol != ' ' && symbol != '\n') {
-                        return false;
-                    }
-                }
-            }
+            stack->pushElement(symbol);
+    } else {
+        if (symbol == '*' || symbol == '/') {
+            stack->pushElement(symbol);
+    } else {
+        if (symbol != ' ' && symbol != '\n') {
+            return false;
         }
-    }
+    }}}}
 
     return true;
 }
