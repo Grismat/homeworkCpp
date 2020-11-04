@@ -21,6 +21,7 @@ struct Stack {
     void pushElement(T value);
 
     T popElement();
+    T topElement();
 
     size_t size() const noexcept;
 

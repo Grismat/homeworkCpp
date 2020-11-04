@@ -40,6 +40,11 @@ T Stack<T>::popElement() {
     return poppedValue;
 }
 
+template <class T>
+T Stack<T>::topElement() {
+    return *top;
+}
+
 template<class T>
 size_t Stack<T>::size() const noexcept {
     return Stack<T>::_size;
