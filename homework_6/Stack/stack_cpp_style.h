@@ -30,4 +30,4 @@ private:
     size_t _size;
 };
 
-#include "stack_cpp_style.cpp";
+#include "stack_cpp_style.cpp"

@@ -42,7 +42,7 @@ T Stack<T>::popElement() {
 
 template <class T>
 T Stack<T>::topElement() {
-    return *top;
+    return top->value;
 }
 
 template<class T>
