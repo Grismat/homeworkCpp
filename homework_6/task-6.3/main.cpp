@@ -1,6 +1,5 @@
-#include <iostream>
-#include <string>
 #include <cstring>
+#include <stdio.h>
 #include "stack_cpp_style.h"
 
 bool processSymbol(Stack<char>* stack, char* outputString,
@@ -10,35 +9,36 @@ bool processSymbol(Stack<char>* stack, char* outputString,
 
     if (symbol == '(') {
         stack->pushElement(symbol);
-    } else {
-        if (symbol == ')') {
-            do {
-                if (stack->size() == 0) {
-                    return false;
-                }
-                oper = stack->popElement();
-                outputString[*outputStringBack] = oper;
-                (*outputStringBack)++;
-            } while (oper != '(');
 
-            (*outputStringBack)--; //ignore added '(' symbol
-    } else {
-        if (symbol == '+' || symbol == '-') {
-            printf("add\n");
-            if (stack->size() != 0 
-                    && (stack->topElement() == '*' || stack->topElement() == '/')) {
-                outputString[*outputStringBack] = stack->popElement();
-                *(outputStringBack)++;
+    } else if (symbol == ')') {
+
+        do {
+            if (stack->size() == 0) {
+                return false;
             }
-            stack->pushElement(symbol);
-    } else {
-        if (symbol == '*' || symbol == '/') {
-            stack->pushElement(symbol);
-    } else {
-        if (symbol != ' ' && symbol != '\n') {
-            return false;
+            oper = stack->popElement();
+            outputString[*outputStringBack] = oper;
+
+            (*outputStringBack)++;
+        } while (oper != '(');
+
+        (*outputStringBack)--; //ignore added '(' symbol
+
+    } else if (symbol == '+' || symbol == '-') {
+
+        if (stack->size() != 0 
+                && (stack->topElement() == '*' || stack->topElement() == '/')) {
+            outputString[*outputStringBack] = stack->popElement();
+            *(outputStringBack)++;
         }
-    }}}}
+        stack->pushElement(symbol);
+
+    } else if (symbol == '*' || symbol == '/') {
+            stack->pushElement(symbol);
+            
+    } else if (symbol != ' ' && symbol != '\n') {
+            return false;
+    }
 
     return true;
 }
