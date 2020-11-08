@@ -7,20 +7,24 @@ void addElement(SortedList* list, ValueType value) {
     newElement->value = value;
     newElement->next = nullptr;
 
-    if (list->begin == nullptr) {
-        list->begin = newElement;
-        return;
-    }
-
     Element* currentElement = list->begin;
-    while (currentElement->next != nullptr
-            && currentElement->next->value < value) {
+    Element* previousElement = nullptr;
 
+    while (currentElement != nullptr
+            && currentElement->value < value) {
+        
+        previousElement = currentElement;
         currentElement = currentElement->next;
     }
     
-    newElement->next = currentElement->next;
-    currentElement->next = newElement;
+    newElement->next = currentElement;
+
+    if (previousElement != nullptr) {
+        previousElement->next = newElement;
+    }
+    else {
+        list->begin = newElement;
+    }
 
     list->size++;
 }
@@ -42,18 +46,24 @@ bool removeElement(SortedList* list, ValueType value) {
         currentElement = currentElement->next;
     }
 
-    previousElement->next = currentElement->next;
+    if (previousElement != nullptr) {
+        previousElement->next = currentElement->next;
+    }
+    else {
+        list->begin = currentElement->next;
+    }
+    
     return true;
 }
 
-void printList(SortedList* list, ValueType value) {
+void printList(SortedList* list) {
 
     Element* currentElement = list->begin;
-    if (list->begin == nullptr) {
-        printf("\n");
-    }
 
-    while (currentElement->next != nullptr) {
+    printf("\n");
+    while (currentElement != nullptr) {
         printf("%i ", currentElement->value);
+        currentElement = currentElement->next;
     }
+    printf("\n");
 }

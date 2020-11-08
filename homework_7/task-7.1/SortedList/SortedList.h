@@ -16,5 +16,5 @@ void addElement(SortedList* list, ValueType value);
 
 bool removeElement(SortedList* list, ValueType value);
 
-void printList(SortedList* list, ValueType value);
+void printList(SortedList* list);
 
