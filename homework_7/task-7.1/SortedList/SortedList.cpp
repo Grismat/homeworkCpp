@@ -53,6 +53,7 @@ bool removeElement(SortedList* list, ValueType value) {
         list->begin = currentElement->next;
     }
     
+    delete currentElement;
     return true;
 }
 
