@@ -5,7 +5,6 @@
 static bool isError = false;
 
 bool applyOperation(Stack* stack, char symbol) {
-
     float secondOperand = 0;        
     float firstOperand = 0;
 
@@ -50,7 +49,6 @@ bool parseString(Stack* stack, std::string const& inputString) {
 }
 
 int main() {
-    
     Stack stack;
 
     printf("Enter an expression in postfix form\n");
