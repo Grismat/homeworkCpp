@@ -1,6 +1,13 @@
 #include "CyclicalList.h"
 #include <stdio.h>
 
+struct Element {
+    ValueType value;
+    Element* next;
+};
+
+struct CyclicalList;
+
 void addElementToEnd(CyclicalList* list, ValueType value) {
     Element* newElement = new Element;
     newElement->value = value;
