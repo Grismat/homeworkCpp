@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 bool checkSymbol(Stack<char>& stack, char const symbol) {
-
     if (symbol == '(' || symbol == '{' || symbol == '[') {
         stack.pushElement(symbol);
     }
@@ -32,7 +31,6 @@ bool checkSymbol(Stack<char>& stack, char const symbol) {
 }
 
 bool parseString(std::string const& inputString) {
-
     Stack<char> stack;
 
     for (int i = 0; i < inputString.size(); i++) {
@@ -60,7 +58,6 @@ bool test() {
 }
 
 int main() {
-
     printf("Running tests...\n");
     if (test()) {
         printf ("Tests OK\n");
