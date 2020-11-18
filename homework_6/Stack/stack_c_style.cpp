@@ -6,10 +6,7 @@ struct Element {
     Element* prev;
 };
 
-struct Stack {
-    Element* top = nullptr;
-    size_t size = 0;
-};
+struct Stack;
 
 void pushElement(Stack* stack, float value) {
     Element* newElement = new Element;

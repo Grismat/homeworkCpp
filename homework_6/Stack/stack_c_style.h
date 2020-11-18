@@ -2,7 +2,11 @@
 #include <cstdlib>
 
 struct Element;
-struct Stack;
+
+struct Stack {
+    Element* top = nullptr;
+    size_t size = 0;
+};
 
 void pushElement(Stack* stack, float value);
 
