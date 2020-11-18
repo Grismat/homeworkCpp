@@ -4,7 +4,6 @@
 
 bool processSymbol(Stack<char>* stack, char* outputString,
                     size_t* outputStringBack, char symbol) {
-    
     char oper;
 
     if (symbol == '(') {
@@ -45,7 +44,7 @@ bool processSymbol(Stack<char>* stack, char* outputString,
 
 bool transformToPostfix(char const* inputString, char* outputString) {
     Stack<char> stack;
-    size_t length = strlen(inputString);
+    size_t const length = strlen(inputString);
 
     size_t outputStringBack = 0;
 
@@ -76,7 +75,6 @@ bool transformToPostfix(char const* inputString, char* outputString) {
 }
 
 int main() {
-
     int const maxLength = 10;
 
     char string[maxLength];
@@ -90,6 +88,5 @@ int main() {
         printf("Error");
     }
     
-
     return 0;
 }

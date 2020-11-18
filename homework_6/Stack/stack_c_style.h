@@ -1,10 +1,7 @@
 #pragma once
 #include <cstdlib>
 
-struct Element {
-    float value;  
-    Element* prev;
-};
+struct Element;
 
 struct Stack {
     Element* top = nullptr;
@@ -12,4 +9,9 @@ struct Stack {
 };
 
 void pushElement(Stack* stack, float value);
+
 bool popElement(Stack* stack, float* result);
+
+float topElement(Stack* stack);
+
+int size(Stack* Stack);
