@@ -20,7 +20,7 @@ public:
     size_t size() const noexcept;
 
 private:
-    struct Element { //стоит ли объявлять структуру внутри класса Stak? Или это неправильно
+    struct Element {
         T value;
         Element* prev;
     };
