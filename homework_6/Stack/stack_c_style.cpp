@@ -1,8 +1,17 @@
 #include <cstddef>
 #include "stack_c_style.h"
 
-void pushElement(Stack* stack, float value) {
+struct Element {
+    float value;  
+    Element* prev;
+};
 
+struct Stack {
+    Element* top = nullptr;
+    size_t size = 0;
+};
+
+void pushElement(Stack* stack, float value) {
     Element* newElement = new Element;
     newElement->value = value;
     newElement->prev = stack->top;
@@ -25,4 +34,12 @@ bool popElement(Stack* stack, float* result) {
 
     *result = poppedValue;
     return true;
+}
+
+float topElement(Stack* stack) {
+    return stack->top->value;
+}
+
+int size(Stack* stack) {
+    return stack->size;
 }

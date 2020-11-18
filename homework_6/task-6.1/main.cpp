@@ -2,8 +2,6 @@
 #include <iostream>
 #include <string>
 
-static bool isError = false;
-
 bool applyOperation(Stack* stack, char symbol) {
     float secondOperand = 0;        
     float firstOperand = 0;
@@ -57,7 +55,7 @@ int main() {
 
     float result = 0;
 
-    if (parseString(&stack, inputString) && stack.size == 1) {
+    if (parseString(&stack, inputString) && size(&stack) == 1) {
         popElement(&stack, &result);
         printf("%f\n", result);
     }
