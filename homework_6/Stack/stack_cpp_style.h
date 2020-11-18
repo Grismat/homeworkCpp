@@ -2,12 +2,6 @@
 #include <stdexcept>
 
 template<class T>
-struct Element { //стоит ли объявлять структуру внутри класса Stak? Или это неправильно
-    T value;
-    Element<T>* prev;
-};
-
-template<class T>
 class Stack {
 public:
     Stack();
@@ -26,7 +20,12 @@ public:
     size_t size() const noexcept;
 
 private:
-    Element<T>* top;
+    struct Element { //стоит ли объявлять структуру внутри класса Stak? Или это неправильно
+        T value;
+        Element* prev;
+    };
+
+    Element* top;
     size_t mSize;
 };
 
@@ -46,7 +45,7 @@ Stack<T>::~Stack() {
 template<class T>
 void Stack<T>::pushElement(T value) {
 
-    Element<T>* newElement = new Element<T>;
+    Element* newElement = new Element;
     newElement->value = value;
     newElement->prev = top;
 
@@ -56,13 +55,12 @@ void Stack<T>::pushElement(T value) {
 
 template<class T>
 T Stack<T>::popElement() {
-    
     if (top == nullptr) {
         throw std::out_of_range("Stack is already empty");
     }
 
     int poppedValue = top->value;
-    Element<T>* previous = top->prev;
+    Element* previous = top->prev;
     delete top;
 
     top = previous;
