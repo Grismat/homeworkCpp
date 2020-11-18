@@ -2,10 +2,7 @@
 
 typedef int ValueType;
 
-struct Element {
-    ValueType value; 
-    Element* next;
-};
+struct Element;
 
 struct SortedList {
     Element* begin = nullptr;

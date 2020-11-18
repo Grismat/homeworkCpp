@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 int main() {
-
     char command[2];
     int value = 0;
     SortedList* list = new SortedList;

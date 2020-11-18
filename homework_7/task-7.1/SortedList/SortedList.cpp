@@ -1,8 +1,14 @@
 #include "SortedList.h"
 #include <stdio.h>
 
-void addElement(SortedList* list, ValueType value) {
-    
+struct Element {
+    ValueType value; 
+    Element* next;
+};
+
+struct SortedList;
+
+void addElement(SortedList* list, ValueType value) {   
     Element* newElement = new Element;
     newElement->value = value;
     newElement->next = nullptr;
@@ -58,7 +64,6 @@ bool removeElement(SortedList* list, ValueType value) {
 }
 
 void printList(SortedList* list) {
-
     Element* currentElement = list->begin;
 
     printf("\n");
