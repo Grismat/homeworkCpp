@@ -6,7 +6,23 @@ struct Element {
     Element* prev;
 };
 
-struct Stack;
+struct Stack {
+    Element* top = nullptr;
+    size_t size = 0;
+};
+
+Stack* createStack() {
+    return new Stack;
+}
+
+void deleteStack(Stack* stack) {
+    while (stack->top != nullptr) {
+        Element* topElement = stack->top;
+        stack->top = stack->top->prev;
+        delete topElement;
+    }
+    delete stack;
+}
 
 void pushElement(Stack* stack, float value) {
     Element* newElement = new Element;

@@ -47,7 +47,7 @@ bool parseString(Stack* stack, std::string const& inputString) {
 }
 
 int main() {
-    Stack* stack = new Stack;
+    Stack* stack = createStack();
 
     printf("Enter an expression in postfix form\n");
     std::string inputString;
@@ -63,6 +63,6 @@ int main() {
         printf("Error\n");
     }
 
-    delete stack;
+    deleteStack(stack);
     return 0;
 }
