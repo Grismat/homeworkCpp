@@ -3,10 +3,12 @@
 
 struct Element;
 
-struct Stack {
-    Element* top = nullptr;
-    size_t size = 0;
-};
+struct Stack;
+
+Stack* createStack();
+
+void deleteStack(Stack* stack);
+
 
 void pushElement(Stack* stack, float value);
 
