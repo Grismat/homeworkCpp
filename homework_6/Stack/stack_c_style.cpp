@@ -18,8 +18,8 @@ Stack* createStack() {
 void deleteStack(Stack* stack) {
     while (stack->top != nullptr) {
         Element* topElement = stack->top;
-        delete topElement;
         stack->top = stack->top->prev;
+        delete topElement;
     }
     delete stack;
 }
