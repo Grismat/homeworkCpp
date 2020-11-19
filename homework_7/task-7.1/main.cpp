@@ -4,7 +4,7 @@
 int main() {
     char command[2];
     int value = 0;
-    SortedList* list = new SortedList;
+    SortedList* list = createList();
     
     do {
         fgets(command, 2, stdin);
@@ -35,5 +35,6 @@ int main() {
 
     } while (command[0] != '0');
 
+    deleteList(list);
     return 0;
 }

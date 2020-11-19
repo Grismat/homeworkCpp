@@ -2,12 +2,10 @@
 
 typedef int ValueType;
 
-struct Element;
+struct SortedList;
 
-struct SortedList {
-    Element* begin = nullptr;
-    int size = 0;
-};
+SortedList* createList();
+void deleteList(SortedList* list);
 
 void addElement(SortedList* list, ValueType value);
 

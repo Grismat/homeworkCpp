@@ -6,7 +6,25 @@ struct Element {
     Element* next;
 };
 
-struct SortedList;
+struct SortedList {
+    Element* begin = nullptr;
+    int size = 0;
+};
+
+SortedList* createList() {
+    return new SortedList;
+}
+
+void deleteList(SortedList* list) {
+    Element* currentElement = list->begin;
+    delete list;
+
+    while (currentElement != nullptr) {
+        Element* elementToDelete = currentElement;
+        currentElement = currentElement->next;
+        delete elementToDelete;
+    }
+}
 
 void addElement(SortedList* list, ValueType value) {   
     Element* newElement = new Element;
