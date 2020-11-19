@@ -2,13 +2,10 @@
 
 typedef int ValueType;
 
-struct Element;
+struct CyclicalList;
 
-struct CyclicalList {
-    Element* begin = nullptr;
-    Element* last = nullptr;
-    int size = 0;
-};
+CyclicalList* createList();
+void deleteList(CyclicalList* list);
 
 void addElementToEnd(CyclicalList* list, ValueType value);
 

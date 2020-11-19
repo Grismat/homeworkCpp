@@ -6,7 +6,29 @@ struct Element {
     Element* next;
 };
 
-struct CyclicalList;
+struct CyclicalList {
+    Element* begin = nullptr;
+    Element* last = nullptr;
+    int size = 0;
+};
+
+CyclicalList* createList() {
+    return new CyclicalList;
+}
+
+void deleteList(CyclicalList* list) {
+    Element* currentElement = list->begin;
+
+    if(currentElement != nullptr) {
+        do {
+            Element* elementToDelete = currentElement;
+            currentElement = currentElement->next;
+            delete elementToDelete;
+        } while (currentElement != list->begin);
+    }
+
+    delete list;
+}
 
 void addElementToEnd(CyclicalList* list, ValueType value) {
     Element* newElement = new Element;
