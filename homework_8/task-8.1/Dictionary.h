@@ -10,10 +10,24 @@ using Element = std::pair<Key, Value>;
 public:
     Dictionary()
         : mRoot(nullptr), mSize(0) {}
-
-    ~Dictionary() { //TODO: delete all nodes
-        delete mRoot;
+    ~Dictionary() {
+        deleteSubtree(mRoot);
     }
+
+    Dictionary(Dictionary& dictionary) = delete;
+    Dictionary& operator=(Dictionary & dictionary) = delete;
+    Dictionary& operator=(Dictionary && dictionary) = delete;
+
+    Dictionary(Dictionary && dictionary) noexcept {
+        deleteSubtree(mRoot);
+        mSize = 0;
+        mRoot = nullptr;
+
+        std::swap(mSize, dictionary.mSize);
+        std::swap(mRoot, dictionary.mRoot);
+    }
+
+
 
     void addElementByKey(Key const& key, Value const& value) {
         Node* const newNode = new Node(key, value);
@@ -34,8 +48,8 @@ public:
         }
     }
 
-    bool deleteElementByKey(Key const& key) {
-        return deleteNodeByKey(key);
+    void deleteElementByKey(Key const& key) {
+        mRoot = deleteNodeByKey(mRoot, key);
     }
 
 private:
@@ -88,7 +102,7 @@ private:
         }
     }
 
-    Node* getNodeByKey(Node* root, Key const& key) const {
+    Node* getNodeByKey(Node* root, Key const& key) const noexcept {
         if (root == nullptr) {
             return nullptr;
         }
@@ -104,34 +118,66 @@ private:
         }
     }
 
-    bool deleteNodeByKey(Node* parent, Node* node, Key const& key) {
-        if (node == nullptr) {
-            return true;
+    Node* deleteNodeByKey(Node* node, Key const& key) {
+        if (node == nullptr) {                                              //if tree is empty
+            return nullptr;
         }
 
         if (key > node->data.first) {
-            return deleteNodeByKey(node, node->rightChild, key);
+            node->rightChild = deleteNodeByKey(node->rightChild, key);
+            return node;
         }
         else if (key < node->data.first) {
-            return deleteNodeByKey(node, node->leftChild, key);
+            node->leftChild = deleteNodeByKey(node->leftChild, key);
+            return node;
         }
-        else {
-            return deleteNode(parent, node);
+        else {                                                            //found node to delete
+            mSize--;
+            if(node->rightChild == nullptr && node->leftChild == nullptr) {     //if node is a leaf
+                delete node;
+                return nullptr;
+            }
+            else if (node->leftChild == nullptr) {                              //if node has only right sibling
+                delete node;
+                return node->rightChild;
+            }
+            else if (node->rightChild == nullptr) {                             //if node has only left sibling
+                delete node;
+                return node->leftChild;
+            }
+            else {                                                              //the only case left when the node has both left and right subtrees
+                Node* leastRightNode = findLeastRightNode(node->rightChild);
+
+                Node* newNode = new Node();
+                newNode->leftChild = node->leftChild;
+                newNode->rightChild = node->rightChild;
+                newNode->data = leastRightNode->data;
+
+                deleteNodeByKey(node, leastRightNode->data.first);              //delete least right node
+                delete node;
+
+                return newNode;
+            }
         }
     }
 
-    bool deleteNode(Node* parent, Node* nodeToDelete) {
-        if (parent == nullptr) {
+    Node* findLeastRightNode(Node* node) const noexcept {        //guaranteed that node != nullptr
+        if (node->leftChild == nullptr) {
+            return node;
+        }
+        return findLeastRightNode(node->leftChild);
+    }
 
+    void deleteSubtree(Node* node) noexcept {
+        if (node->leftChild != nullptr) {
+            deleteSubtree(node->leftChild);
         }
 
-        if (nodeToDelete->rightChild == nullptr
-                && nodeToDelete->leftChild == nullptr) {
-            delete nodeToDelete;
+        if (node->rightChild != nullptr) {
+            deleteSubtree(node->rightChild);
         }
-        else if (nodeToDelete->rightChild == nullptr) {
-            delete nodeToDelete;
-        }
+
+        delete node;
     }
 };
 
