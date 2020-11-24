@@ -59,7 +59,6 @@ void handleInput(char const digit, Dictionary<int, std::string> & dictionary) {
 }
 
 int main() {
-
     Dictionary<int, std::string> dictionary;
     char command;
 
